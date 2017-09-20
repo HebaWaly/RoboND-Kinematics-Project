@@ -81,26 +81,18 @@ def test_code(test_case):
     # Define Modified DH Transformation matrix
     def transform(alpha, a, d, q):
         T = Matrix([[           cos(q),           -sin(q),          0,              a],
-              [sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
-              [sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
-              [                0,                 0,           0,             1]])
+                    [sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
+                    [sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
+                    [                0,                 0,           0,             1]])
         return T
     # Create individual transformation matrices
-    T0_1 = transform(alpha0, a0, d1, q1)
-    T1_2 = transform(alpha1, a1, d2, q2)
-    T2_3 = transform(alpha2, a2, d3, q3)
-    T3_4 = transform(alpha3, a3, d4, q4)
-    T4_5 = transform(alpha4, a4, d5, q5)
-    T5_6 = transform(alpha5, a5, d6, q6)
-    T6_G = transform(alpha6, a6, d7, q7)
-
-    T0_1 = T0_1.subs(s)
-    T1_2 = T1_2.subs(s)
-    T2_3 = T2_3.subs(s)
-    T3_4 = T3_4.subs(s)
-    T4_5 = T4_5.subs(s)
-    T5_6 = T5_6.subs(s)
-    T6_G = T6_G.subs(s)
+    T0_1 = transform(alpha0, a0, d1, q1).subs(s)
+    T1_2 = transform(alpha1, a1, d2, q2).subs(s)
+    T2_3 = transform(alpha2, a2, d3, q3).subs(s)
+    T3_4 = transform(alpha3, a3, d4, q4).subs(s)
+    T4_5 = transform(alpha4, a4, d5, q5).subs(s)
+    T5_6 = transform(alpha5, a5, d6, q6).subs(s)
+    T6_G = transform(alpha6, a6, d7, q7).subs(s)
 
     T0_2 = T0_1 * T1_2
     T0_3 = T0_2 * T2_3
@@ -108,7 +100,6 @@ def test_code(test_case):
     T0_5 = T0_4 * T4_5
     T0_6 = T0_5 * T5_6
     T0_G = T0_6 * T6_G
-    # angles = {q1: 0., q2: -pi/2., q3: 0., q4: 0., q5: 0., q6: 0., q7: 0.}
                   
     # Correction rotation
     R_z = Matrix([[cos(pi), -sin(pi), 0, 0],
@@ -204,8 +195,8 @@ def test_code(test_case):
     ########################################################################################
 
     ## For error analysis please set the following variables of your WC location and EE location in the format of [x,y,z]
-    your_wc = [1,1,1] # <--- Load your calculated WC values in this array
-    your_ee = [1,1,1] # <--- Load your calculated end effector value from your forward kinematics
+    your_wc = [WC[0],WC[1],WC[2]] # <--- Load your calculated WC values in this array
+    your_ee = [FK[0,3],FK[1,3],FK[2,3]] # <--- Load your calculated end effector value from your forward kinematics
     ########################################################################################
 
     ## Error analysis
@@ -256,6 +247,6 @@ def test_code(test_case):
 
 if __name__ == "__main__":
     # Change test case number for different scenarios
-    test_case_number = 1
+    test_case_number = 3
 
     test_code(test_cases[test_case_number])
