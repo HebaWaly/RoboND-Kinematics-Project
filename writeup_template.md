@@ -126,7 +126,7 @@ Then using the WC and the DH parameter table, the first three joint angles can b
 
 ![First 3 angles][Joint_angles]
 
-After that the second 3 joint angles is calculated using the following calculations:
+After that the second 3 joint angles are calculated using the following calculations:
 ```
 R0_3 = T0_3[0:3,0:3].evalf(subs={q1: theta1, q2: theta2, q3: theta3})
 R3_6 = R0_3.inv("LU") * Rot_G
@@ -151,7 +151,9 @@ Although writing the equations only should guide the robot, but the arm movement
 If I were going to pursue this project further, I'd work on improving the performace, and decreasing the unnecessary rotations performed by the last 3 joints while moving to the target or to the drop off locations.
 
 Here are some screenshots showing the arm in action:
+
 ![pick up][Pickup]
+
 ![drop off][Dropoff]
 
 
