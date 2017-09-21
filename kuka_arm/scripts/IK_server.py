@@ -26,7 +26,7 @@ def handle_calculate_IK(req):
         return -1
     else:
     
-        ### Your FK code here
+        ### FK ###
         # Create symbols
         q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')
         d1, d2, d3, d4, d5, d6, d7 = symbols('d1:8')
@@ -62,11 +62,9 @@ def handle_calculate_IK(req):
         T0_5 = T0_4 * T4_5
         T0_6 = T0_5 * T5_6
         T0_G = T0_6 * T6_G
-                      
-        # Extract rotation matrices from the transformation matrices
-        #
-        #
-        ###
+        ### FK end ###
+
+        ### IK ###
         R_x = Matrix([[ 1,              0,        0],
                       [ 0,        cos(q1), -sin(q1)],
                       [ 0,        sin(q1),  cos(q1)]])
@@ -80,11 +78,11 @@ def handle_calculate_IK(req):
                       [ 0,              0,        1]])
         R_correction = R_z.subs(q3, pi) * R_y.subs(q2, -pi/2.)
         Rot_G = R_z * R_y * R_x
-        Rot_G = Rot_G * R_correction        
+        Rot_G = Rot_G * R_correction
+
         # Initialize service response
         joint_trajectory_list = []
         for x in xrange(0, len(req.poses)):
-            # IK code starts here
             joint_trajectory_point = JointTrajectoryPoint()
 
             # Extract end-effector position and orientation from request
@@ -99,9 +97,6 @@ def handle_calculate_IK(req):
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
             # Rotation Angles:
             Rot_G = Rot_G.subs({q3: yaw, q2: pitch, q1: roll})
-            
-            ### Your IK code here
-            # Compensate for rotation discrepancy between DH parameters and Gazebo
             
             # Calculate joint angles using Geometric IK method
             EE = Matrix([[px],
