@@ -19,10 +19,10 @@
 
 [DH_diagram]: ./writeup_images/DH_diagram.jpg
 [DH_table]: ./writeup_images/DH_table.jpg
-[FK]: ./writeup_images/FK_calculations.jpg
+[FK]: ./writeup_images/FK_calculations.png
 [Joint_angles]: ./writeup_images/theta1_2_3.jpg
-[Dropoff]: ./writeup_images/dropoff.jpg
-[Pickup]: ./writeup_images/pickup.jpg
+[Dropoff]: ./writeup_images/dropoff.png
+[Pickup]: ./writeup_images/pickup.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
